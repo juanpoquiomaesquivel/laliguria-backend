@@ -15,17 +15,8 @@ public class SupplyRequestDTO {
 	@Column(name = "Id")
 	private Integer id;
 
-	@Column(name = "StatusId")
-	private Integer statusId;
-
-	@Column(name = "StatusName")
-	private String statusName;
-
-	@Column(name = "StatusDescription")
-	private String statusDescription;
-
-	@Column(name = "StatusColorHex")
-	private String statusColorHex;
+	@Column(name = "Status")
+	private Integer status;
 
 	@Column(name = "Area")
 	private Integer area;

@@ -27,8 +27,8 @@ public class SupplyItemDataDTO {
 	@Column(name = "Registration")
 	private Date registration;
 
-	@Column(name = "ReceivedAmount")
-	private Integer receivedAmount;
+	@Column(name = "Quantity")
+	private Integer quantity;
 
 	@Column(name = "Available")
 	private Integer available;

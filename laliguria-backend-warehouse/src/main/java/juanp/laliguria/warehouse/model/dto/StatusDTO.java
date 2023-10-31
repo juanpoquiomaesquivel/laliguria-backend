@@ -5,7 +5,10 @@ import javax.persistence.Column;
 import lombok.Value;
 
 @Value
-public class DgSupplyRequestSeeDataDTO {
+public class StatusDTO {
+
+	@Column(name = "Id")
+	private Integer id;
 
 	@Column(name = "Name")
 	private String name;
@@ -13,9 +16,6 @@ public class DgSupplyRequestSeeDataDTO {
 	@Column(name = "Description")
 	private String description;
 
-	@Column(name = "RequestedQuantity")
-	private Integer requestedQuantity;
-
-	@Column(name = "IsEnough")
-	private Boolean isEnough;
+	@Column(name = "ColorHex")
+	private String colorHex;
 }

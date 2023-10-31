@@ -5,6 +5,6 @@ import lombok.Value;
 @Value
 public class Message {
 
-	private Integer status;
-	private String message;
+	private Integer code;
+	private String description;
 }

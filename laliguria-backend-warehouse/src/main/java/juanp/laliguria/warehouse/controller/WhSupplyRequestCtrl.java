@@ -14,19 +14,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import juanp.laliguria.warehouse.model.dto.DgSupplyRequestSeeDataDTO;
+import juanp.laliguria.warehouse.model.dto.StatusDTO;
 import juanp.laliguria.warehouse.model.dto.SupplyRequestDTO;
 import juanp.laliguria.warehouse.service.WhSupplyRequestServ;
 import juanp.laliguria.warehouse.utils.Message;
 
 @RestController
-@RequestMapping("wh/supply-request/api")
+@RequestMapping("/warehouse/supply-request/api")
 @CrossOrigin(origins = "http://localhost:4200")
 public class WhSupplyRequestCtrl {
 
 	@Autowired
 	private WhSupplyRequestServ serv;
 
-	@GetMapping("/get/request/list")
+	@GetMapping("/get/status/all")
+	public ResponseEntity<List<StatusDTO>> getStatusList() throws Exception {
+		Optional<List<StatusDTO>> list = Optional.ofNullable(serv.getStatusList());
+
+		if (list.isEmpty()) {
+			throw new Exception("ERROR => [getStatusList]");
+		}
+
+		return ResponseEntity.ok(list.get());
+	}
+
+	@GetMapping("/get/request/all")
 	public ResponseEntity<List<SupplyRequestDTO>> getSupplyRequestList() throws Exception {
 		Optional<List<SupplyRequestDTO>> list = Optional.ofNullable(serv.getSupplyRequestList());
 
@@ -57,25 +69,20 @@ public class WhSupplyRequestCtrl {
 
 		switch (id) {
 		case 1:
-			return ResponseEntity
-					.ok(new Message(HttpStatus.BAD_REQUEST.value(), "Accion denegada, la solicitud esta bloqueada."));
+			return ResponseEntity.ok(new Message(101, "Accion denegada, la solicitud esta bloqueada."));
 		case 3:
-			return ResponseEntity.ok(new Message(HttpStatus.BAD_REQUEST.value(),
-					"Accion denegada, la solicitud se encuentra en atencion."));
+			return ResponseEntity.ok(new Message(103, "Accion denegada, la solicitud se encuentra en atencion."));
 		case 4:
-			return ResponseEntity
-					.ok(new Message(HttpStatus.BAD_REQUEST.value(), "Accion denegada, la solicitud ha sido atendida."));
+			return ResponseEntity.ok(new Message(104, "Accion denegada, la solicitud ha sido atendida."));
 		case 5:
-			return ResponseEntity.ok(
-					new Message(HttpStatus.BAD_REQUEST.value(), "Accion denegada, la solicitud ha sido rechazada."));
+			return ResponseEntity.ok(new Message(105, "Accion denegada, la solicitud ha sido rechazada."));
 		case 6:
-			return ResponseEntity.ok(
-					new Message(HttpStatus.BAD_REQUEST.value(), "Accion denegada, la solicitud ha sido cancelada."));
+			return ResponseEntity.ok(new Message(106, "Accion denegada, la solicitud ha sido cancelada."));
 		}
 
 		serv.putAcceptSupplyRequest(supplyRequestId);
 
-		return ResponseEntity.ok(new Message(HttpStatus.ACCEPTED.value(), "Solicitud aceptada."));
+		return ResponseEntity.ok(new Message(201, "Solicitud aceptada."));
 	}
 
 	@PutMapping("/put/request/{SupplyRequestId}/finish")
@@ -85,25 +92,20 @@ public class WhSupplyRequestCtrl {
 
 		switch (id) {
 		case 1:
-			return ResponseEntity
-					.ok(new Message(HttpStatus.BAD_REQUEST.value(), "Accion denegada, la solicitud esta bloqueada."));
+			return ResponseEntity.ok(new Message(101, "Accion denegada, la solicitud esta bloqueada."));
 		case 2:
-			return ResponseEntity.ok(new Message(HttpStatus.BAD_REQUEST.value(),
-					"Accion denegada, la solicitud se encuentra en espera."));
+			return ResponseEntity.ok(new Message(102, "Accion denegada, la solicitud se encuentra en espera."));
 		case 4:
-			return ResponseEntity
-					.ok(new Message(HttpStatus.BAD_REQUEST.value(), "Accion denegada, la solicitud ha sido atendida."));
+			return ResponseEntity.ok(new Message(104, "Accion denegada, la solicitud ha sido atendida."));
 		case 5:
-			return ResponseEntity.ok(
-					new Message(HttpStatus.BAD_REQUEST.value(), "Accion denegada, la solicitud ha sido rechazada."));
+			return ResponseEntity.ok(new Message(105, "Accion denegada, la solicitud ha sido rechazada."));
 		case 6:
-			return ResponseEntity.ok(
-					new Message(HttpStatus.BAD_REQUEST.value(), "Accion denegada, la solicitud ha sido cancelada."));
+			return ResponseEntity.ok(new Message(106, "Accion denegada, la solicitud ha sido cancelada."));
 		}
 
 		serv.putFinishSupplyRequest(supplyRequestId);
 
-		return ResponseEntity.ok(new Message(HttpStatus.ACCEPTED.value(), "Solicitud atendida."));
+		return ResponseEntity.ok(new Message(202, "Solicitud atendida."));
 	}
 
 	@PutMapping("/put/request/{SupplyRequestId}/deny")
@@ -113,24 +115,19 @@ public class WhSupplyRequestCtrl {
 
 		switch (id) {
 		case 1:
-			return ResponseEntity
-					.ok(new Message(HttpStatus.BAD_REQUEST.value(), "Accion denegada, la solicitud esta bloqueada."));
+			return ResponseEntity.ok(new Message(101, "Accion denegada, la solicitud esta bloqueada."));
 		case 3:
-			return ResponseEntity.ok(new Message(HttpStatus.BAD_REQUEST.value(),
-					"Accion denegada, la solicitud se encuentra en atencion."));
+			return ResponseEntity.ok(new Message(103, "Accion denegada, la solicitud se encuentra en atencion."));
 		case 4:
-			return ResponseEntity
-					.ok(new Message(HttpStatus.BAD_REQUEST.value(), "Accion denegada, la solicitud ha sido atendida."));
+			return ResponseEntity.ok(new Message(104, "Accion denegada, la solicitud ha sido atendida."));
 		case 5:
-			return ResponseEntity.ok(
-					new Message(HttpStatus.BAD_REQUEST.value(), "Accion denegada, la solicitud ha sido rechazada."));
+			return ResponseEntity.ok(new Message(105, "Accion denegada, la solicitud ha sido rechazada."));
 		case 6:
-			return ResponseEntity.ok(
-					new Message(HttpStatus.BAD_REQUEST.value(), "Accion denegada, la solicitud ha sido cancelada."));
+			return ResponseEntity.ok(new Message(106, "Accion denegada, la solicitud ha sido cancelada."));
 		}
 
 		serv.putDenySupplyRequest(supplyRequestId);
 
-		return ResponseEntity.ok(new Message(HttpStatus.ACCEPTED.value(), "Solicitud rechazada."));
+		return ResponseEntity.ok(new Message(203, "Solicitud rechazada."));
 	}
 }

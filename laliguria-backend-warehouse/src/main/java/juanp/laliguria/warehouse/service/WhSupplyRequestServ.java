@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import juanp.laliguria.warehouse.model.dto.DgSupplyRequestSeeDataDTO;
+import juanp.laliguria.warehouse.model.dto.StatusDTO;
 import juanp.laliguria.warehouse.model.dto.SupplyRequestDTO;
 import juanp.laliguria.warehouse.repository.WhSupplyRequestRepo;
 
@@ -17,8 +18,8 @@ public class WhSupplyRequestServ {
 	private WhSupplyRequestRepo repo;
 
 	@Transactional
-	public Integer getSupplyRequestStatus(Integer supplyRequestId) {
-		return repo.getSupplyRequestStatus(supplyRequestId);
+	public List<StatusDTO> getStatusList() {
+		return repo.getStatusList();
 	}
 
 	@Transactional
@@ -29,6 +30,11 @@ public class WhSupplyRequestServ {
 	@Transactional
 	public List<DgSupplyRequestSeeDataDTO> getDgSupplyRequestSeeDataList(Integer supplyRequestId) {
 		return repo.UpWhDgSupplyRequestSeeDataList(supplyRequestId);
+	}
+
+	@Transactional
+	public Integer getSupplyRequestStatus(Integer supplyRequestId) {
+		return repo.getSupplyRequestStatus(supplyRequestId);
 	}
 
 	@Transactional

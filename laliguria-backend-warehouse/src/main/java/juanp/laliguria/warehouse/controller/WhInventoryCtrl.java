@@ -14,14 +14,14 @@ import juanp.laliguria.warehouse.model.dto.SupplyItemDataDTO;
 import juanp.laliguria.warehouse.service.WhInventoryServ;
 
 @RestController
-@RequestMapping("wh/inventory/api")
+@RequestMapping("/warehouse/inventory/api")
 @CrossOrigin(origins = "http://localhost:4200")
 public class WhInventoryCtrl {
 
 	@Autowired
 	private WhInventoryServ serv;
 
-	@GetMapping("/get/supply/list")
+	@GetMapping("/get/supply/all")
 	public ResponseEntity<List<SupplyItemDataDTO>> getSupplyItemDataList() throws Exception {
 		Optional<List<SupplyItemDataDTO>> list = Optional.ofNullable(serv.getSupplyItemDataList());
 

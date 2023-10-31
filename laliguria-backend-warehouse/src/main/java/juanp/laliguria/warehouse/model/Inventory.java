@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @SqlResultSetMapping(name = "Mapping.SupplyItemDataDTO", classes = @ConstructorResult(targetClass = SupplyItemDataDTO.class, columns = {
 		@ColumnResult(name = "Code"), @ColumnResult(name = "Name"), @ColumnResult(name = "Description"),
 		@ColumnResult(name = "Provider"), @ColumnResult(name = "Category"), @ColumnResult(name = "Registration"),
-		@ColumnResult(name = "ReceivedAmount", type = Integer.class), @ColumnResult(name = "Available", type = Integer.class) }))
+		@ColumnResult(name = "Quantity", type = Integer.class), @ColumnResult(name = "Available", type = Integer.class) }))
 @Entity
 @Table(name = "Inventory")
 @Data
